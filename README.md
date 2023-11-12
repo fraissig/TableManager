@@ -5,18 +5,18 @@ The tool is coded in Python and request PyQt5 for the Graphical User Interface.
 
 ## Table Definition (.json file)
 The following dictionary fields are expected, for each item of the table:
-'''
+```
 {
 "name"        : <item name (string)>,
-**"datatype"    : <item data type (string)>,
-**"defaultvalue": <item default value>,
-**"description" : <item short description (string)>,
-**"length"      : <item length (optional: default=1)>,
-**"datarange"   : <item range (optional: list) or item enumerated values (optional: dict)>
-**"editable"    : <item edit boolean (optional: default=1 True)>,
-**"displaytype" : <item displaying mode (optional: "hex" to display in hex format>
+"datatype"    : <item data type (string)>,
+"defaultvalue": <item default value>,
+"description" : <item short description (string)>,
+"length"      : <item length (optional: default=1)>,
+"datarange"   : <item range (optional: list) or item enumerated values (optional: dict)>
+"editable"    : <item edit boolean (optional: default=1 True)>,
+"displaytype" : <item displaying mode (optional: "hex" to display in hex format>
 }
-'''
+```
 
 Available datatype
 ------------------
