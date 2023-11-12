@@ -1,0 +1,5892 @@
+[
+  {
+    "name": "ContentType",
+    "datatype": "uint32",
+    "defaultvalue": "0x63464531",
+    "description": "Identifies the content type (='cFE1'=0x63464531)",
+    "length": 1,
+    "range": [
+      0,
+      "None"
+    ],
+    "editable": 0
+  },
+  {
+    "name": "SubType",
+    "datatype": "uint32",
+    "defaultvalue": 0,
+    "description": "Type of ContentType, if necessary",
+    "length": 1,
+    "range": [
+      0,
+      "None"
+    ],
+    "editable": 0
+  },
+  {
+    "name": "Length",
+    "datatype": "uint32",
+    "defaultvalue": 0,
+    "description": "Length of this header to support external processing",
+    "length": 1,
+    "range": [
+      0,
+      "None"
+    ],
+    "editable": 0
+  },
+  {
+    "name": "SpacecraftID",
+    "datatype": "uint32",
+    "defaultvalue": 0,
+    "description": "Spacecraft that generated the file",
+    "length": 1,
+    "range": [
+      0,
+      "None"
+    ],
+    "editable": 1
+  },
+  {
+    "name": "ProcessorID",
+    "datatype": "uint32",
+    "defaultvalue": 0,
+    "description": "Processor that generated the file",
+    "length": 1,
+    "range": [
+      0,
+      "None"
+    ],
+    "editable": 1
+  },
+  {
+    "name": "ApplicationID",
+    "datatype": "uint32",
+    "defaultvalue": 15,
+    "description": "Application that generated the file",
+    "length": 1,
+    "range": [
+      0,
+      "None"
+    ],
+    "editable": 1
+  },
+  {
+    "name": "TimeSeconds",
+    "datatype": "uint32",
+    "defaultvalue": 0,
+    "description": "File creation timestamp from epoch (seconds)",
+    "length": 1,
+    "editable": 0,
+    "displaytype" : "seconds"
+  },
+  {
+    "name": "TimeSubSeconds",
+    "datatype": "uint32",
+    "defaultvalue": 0,
+    "description": "File creation timestamp from epoch (subseconds)",
+    "length": 1,
+    "editable": 0,
+    "displaytype": "subseconds"
+  },
+  {
+    "name": "Description",
+    "datatype": "string",
+    "defaultvalue": "HK Copy Tbl",
+    "description": "File description",
+    "length": 32,
+    "editable": 1
+  },
+  {
+    "name": "Reserved",
+    "datatype": "uint32",
+    "defaultvalue": 0,
+    "description": "Reserved for future",
+    "length": 1,
+    "editable": 0
+  },
+  {
+    "name": "Offset",
+    "datatype": "uint32",
+    "defaultvalue": 0,
+    "description": "Byte Offset at which load should commence",
+    "length": 1,
+    "editable": 0
+  },
+  {
+    "name": "NumBytes",
+    "datatype": "uint32",
+    "defaultvalue": 0,
+    "description": "Number of bytes to load into table",
+    "length": 1,
+    "editable": 0
+  },
+  {
+    "name": "TableName",
+    "datatype": "string",
+    "defaultvalue": "HK.CopyTable",
+    "description": "Fully qualified name of table to load ",
+    "length": 40,
+    "editable": 0
+  },
+    {
+    "name": "inputMID#0",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#0 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#0",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#0 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#0",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#0 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#0",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#0 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#0",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#0",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#1",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#1 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#1",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#1 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#1",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#1 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#1",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#1 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#1",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#1",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#2",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#2 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#2",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#2 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#2",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#2 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#2",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#2 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#2",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#2",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#3",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#3 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#3",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#3 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#3",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#3 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#3",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#3 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#3",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#3",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#4",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#4 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#4",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#4 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#4",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#4 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#4",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#4 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#4",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#4",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#5",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#5 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#5",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#5 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#5",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#5 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#5",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#5 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#5",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#5",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#6",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#6 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#6",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#6 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#6",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#6 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#6",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#6 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#6",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#6",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#7",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#7 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#7",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#7 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#7",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#7 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#7",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#7 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#7",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#7",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#8",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#8 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#8",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#8 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#8",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#8 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#8",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#8 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#8",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#8",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#9",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#9 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#9",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#9 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#9",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#9 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#9",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#9 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#9",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#9",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#10",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#10 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#10",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#10 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#10",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#10 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#10",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#10 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#10",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#10",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#11",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#11 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#11",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#11 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#11",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#11 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#11",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#11 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#11",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#11",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#12",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#12 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#12",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#12 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#12",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#12 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#12",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#12 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#12",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#12",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#13",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#13 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#13",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#13 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#13",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#13 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#13",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#13 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#13",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#13",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#14",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#14 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#14",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#14 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#14",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#14 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#14",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#14 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#14",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#14",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#15",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#15 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#15",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#15 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#15",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#15 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#15",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#15 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#15",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#15",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#16",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#16 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#16",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#16 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#16",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#16 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#16",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#16 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#16",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#16",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#17",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#17 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#17",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#17 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#17",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#17 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#17",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#17 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#17",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#17",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#18",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#18 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#18",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#18 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#18",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#18 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#18",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#18 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#18",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#18",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#19",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#19 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#19",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#19 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#19",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#19 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#19",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#19 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#19",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#19",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#20",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#20 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#20",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#20 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#20",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#20 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#20",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#20 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#20",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#20",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#21",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#21 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#21",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#21 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#21",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#21 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#21",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#21 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#21",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#21",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#22",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#22 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#22",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#22 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#22",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#22 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#22",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#22 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#22",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#22",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#23",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#23 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#23",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#23 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#23",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#23 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#23",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#23 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#23",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#23",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#24",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#24 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#24",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#24 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#24",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#24 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#24",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#24 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#24",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#24",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#25",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#25 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#25",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#25 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#25",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#25 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#25",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#25 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#25",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#25",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#26",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#26 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#26",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#26 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#26",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#26 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#26",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#26 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#26",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#26",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#27",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#27 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#27",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#27 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#27",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#27 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#27",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#27 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#27",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#27",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#28",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#28 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#28",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#28 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#28",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#28 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#28",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#28 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#28",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#28",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#29",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#29 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#29",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#29 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#29",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#29 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#29",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#29 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#29",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#29",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#30",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#30 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#30",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#30 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#30",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#30 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#30",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#30 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#30",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#30",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#31",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#31 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#31",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#31 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#31",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#31 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#31",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#31 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#31",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#31",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#32",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#32 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#32",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#32 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#32",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#32 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#32",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#32 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#32",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#32",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#33",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#33 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#33",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#33 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#33",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#33 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#33",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#33 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#33",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#33",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#34",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#34 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#34",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#34 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#34",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#34 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#34",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#34 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#34",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#34",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#35",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#35 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#35",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#35 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#35",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#35 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#35",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#35 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#35",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#35",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#36",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#36 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#36",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#36 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#36",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#36 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#36",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#36 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#36",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#36",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#37",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#37 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#37",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#37 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#37",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#37 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#37",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#37 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#37",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#37",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#38",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#38 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#38",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#38 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#38",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#38 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#38",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#38 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#38",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#38",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#39",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#39 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#39",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#39 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#39",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#39 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#39",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#39 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#39",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#39",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#40",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#40 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#40",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#40 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#40",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#40 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#40",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#40 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#40",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#40",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#41",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#41 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#41",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#41 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#41",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#41 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#41",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#41 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#41",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#41",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#42",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#42 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#42",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#42 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#42",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#42 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#42",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#42 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#42",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#42",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#43",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#43 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#43",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#43 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#43",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#43 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#43",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#43 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#43",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#43",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#44",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#44 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#44",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#44 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#44",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#44 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#44",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#44 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#44",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#44",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#45",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#45 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#45",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#45 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#45",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#45 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#45",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#45 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#45",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#45",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#46",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#46 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#46",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#46 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#46",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#46 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#46",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#46 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#46",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#46",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#47",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#47 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#47",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#47 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#47",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#47 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#47",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#47 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#47",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#47",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#48",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#48 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#48",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#48 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#48",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#48 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#48",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#48 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#48",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#48",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#49",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#49 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#49",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#49 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#49",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#49 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#49",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#49 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#49",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#49",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#50",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#50 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#50",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#50 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#50",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#50 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#50",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#50 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#50",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#50",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#51",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#51 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#51",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#51 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#51",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#51 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#51",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#51 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#51",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#51",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#52",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#52 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#52",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#52 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#52",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#52 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#52",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#52 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#52",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#52",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#53",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#53 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#53",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#53 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#53",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#53 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#53",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#53 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#53",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#53",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#54",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#54 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#54",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#54 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#54",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#54 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#54",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#54 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#54",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#54",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#55",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#55 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#55",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#55 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#55",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#55 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#55",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#55 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#55",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#55",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#56",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#56 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#56",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#56 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#56",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#56 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#56",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#56 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#56",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#56",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#57",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#57 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#57",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#57 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#57",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#57 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#57",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#57 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#57",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#57",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#58",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#58 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#58",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#58 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#58",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#58 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#58",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#58 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#58",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#58",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#59",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#59 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#59",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#59 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#59",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#59 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#59",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#59 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#59",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#59",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#60",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#60 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#60",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#60 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#60",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#60 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#60",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#60 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#60",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#60",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#61",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#61 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#61",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#61 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#61",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#61 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#61",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#61 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#61",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#61",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#62",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#62 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#62",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#62 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#62",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#62 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#62",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#62 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#62",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#62",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#63",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#63 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#63",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#63 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#63",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#63 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#63",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#63 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#63",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#63",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#64",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#64 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#64",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#64 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#64",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#64 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#64",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#64 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#64",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#64",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#65",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#65 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#65",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#65 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#65",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#65 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#65",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#65 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#65",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#65",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#66",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#66 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#66",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#66 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#66",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#66 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#66",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#66 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#66",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#66",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#67",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#67 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#67",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#67 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#67",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#67 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#67",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#67 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#67",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#67",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#68",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#68 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#68",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#68 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#68",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#68 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#68",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#68 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#68",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#68",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#69",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#69 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#69",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#69 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#69",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#69 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#69",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#69 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#69",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#69",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#70",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#70 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#70",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#70 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#70",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#70 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#70",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#70 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#70",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#70",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#71",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#71 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#71",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#71 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#71",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#71 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#71",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#71 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#71",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#71",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#72",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#72 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#72",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#72 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#72",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#72 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#72",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#72 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#72",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#72",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#73",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#73 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#73",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#73 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#73",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#73 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#73",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#73 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#73",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#73",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#74",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#74 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#74",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#74 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#74",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#74 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#74",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#74 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#74",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#74",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#75",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#75 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#75",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#75 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#75",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#75 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#75",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#75 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#75",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#75",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#76",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#76 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#76",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#76 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#76",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#76 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#76",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#76 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#76",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#76",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#77",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#77 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#77",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#77 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#77",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#77 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#77",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#77 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#77",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#77",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#78",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#78 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#78",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#78 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#78",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#78 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#78",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#78 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#78",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#78",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#79",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#79 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#79",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#79 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#79",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#79 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#79",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#79 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#79",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#79",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#80",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#80 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#80",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#80 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#80",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#80 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#80",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#80 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#80",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#80",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#81",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#81 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#81",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#81 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#81",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#81 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#81",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#81 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#81",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#81",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#82",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#82 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#82",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#82 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#82",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#82 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#82",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#82 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#82",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#82",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#83",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#83 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#83",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#83 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#83",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#83 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#83",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#83 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#83",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#83",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#84",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#84 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#84",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#84 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#84",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#84 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#84",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#84 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#84",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#84",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#85",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#85 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#85",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#85 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#85",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#85 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#85",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#85 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#85",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#85",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#86",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#86 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#86",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#86 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#86",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#86 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#86",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#86 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#86",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#86",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#87",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#87 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#87",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#87 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#87",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#87 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#87",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#87 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#87",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#87",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#88",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#88 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#88",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#88 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#88",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#88 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#88",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#88 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#88",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#88",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#89",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#89 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#89",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#89 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#89",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#89 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#89",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#89 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#89",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#89",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#90",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#90 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#90",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#90 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#90",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#90 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#90",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#90 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#90",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#90",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#91",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#91 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#91",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#91 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#91",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#91 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#91",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#91 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#91",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#91",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#92",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#92 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#92",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#92 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#92",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#92 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#92",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#92 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#92",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#92",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#93",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#93 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#93",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#93 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#93",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#93 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#93",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#93 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#93",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#93",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#94",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#94 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#94",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#94 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#94",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#94 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#94",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#94 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#94",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#94",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#95",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#95 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#95",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#95 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#95",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#95 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#95",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#95 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#95",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#95",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#96",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#96 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#96",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#96 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#96",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#96 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#96",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#96 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#96",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#96",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#97",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#97 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#97",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#97 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#97",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#97 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#97",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#97 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#97",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#97",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#98",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#98 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#98",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#98 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#98",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#98 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#98",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#98 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#98",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#98",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#99",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#99 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#99",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#99 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#99",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#99 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#99",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#99 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#99",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#99",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#100",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#100 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#100",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#100 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#100",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#100 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#100",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#100 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#100",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#100",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#101",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#101 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#101",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#101 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#101",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#101 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#101",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#101 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#101",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#101",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#102",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#102 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#102",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#102 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#102",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#102 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#102",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#102 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#102",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#102",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#103",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#103 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#103",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#103 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#103",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#103 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#103",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#103 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#103",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#103",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#104",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#104 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#104",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#104 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#104",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#104 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#104",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#104 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#104",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#104",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#105",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#105 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#105",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#105 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#105",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#105 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#105",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#105 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#105",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#105",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#106",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#106 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#106",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#106 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#106",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#106 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#106",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#106 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#106",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#106",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#107",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#107 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#107",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#107 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#107",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#107 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#107",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#107 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#107",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#107",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#108",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#108 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#108",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#108 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#108",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#108 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#108",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#108 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#108",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#108",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#109",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#109 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#109",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#109 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#109",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#109 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#109",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#109 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#109",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#109",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#110",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#110 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#110",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#110 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#110",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#110 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#110",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#110 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#110",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#110",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#111",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#111 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#111",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#111 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#111",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#111 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#111",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#111 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#111",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#111",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#112",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#112 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#112",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#112 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#112",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#112 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#112",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#112 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#112",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#112",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#113",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#113 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#113",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#113 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#113",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#113 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#113",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#113 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#113",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#113",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#114",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#114 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#114",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#114 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#114",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#114 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#114",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#114 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#114",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#114",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#115",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#115 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#115",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#115 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#115",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#115 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#115",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#115 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#115",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#115",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#116",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#116 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#116",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#116 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#116",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#116 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#116",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#116 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#116",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#116",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#117",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#117 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#117",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#117 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#117",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#117 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#117",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#117 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#117",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#117",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#118",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#118 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#118",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#118 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#118",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#118 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#118",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#118 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#118",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#118",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#119",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#119 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#119",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#119 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#119",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#119 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#119",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#119 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#119",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#119",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#120",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#120 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#120",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#120 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#120",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#120 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#120",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#120 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#120",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#120",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#121",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#121 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#121",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#121 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#121",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#121 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#121",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#121 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#121",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#121",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#122",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#122 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#122",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#122 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#122",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#122 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#122",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#122 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#122",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#122",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#123",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#123 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#123",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#123 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#123",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#123 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#123",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#123 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#123",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#123",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#124",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#124 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#124",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#124 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#124",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#124 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#124",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#124 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#124",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#124",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#125",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#125 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#125",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#125 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#125",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#125 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#125",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#125 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#125",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#125",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#126",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#126 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#126",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#126 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#126",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#126 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#126",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#126 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#126",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#126",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputMID#127",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#127 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "inputOffset#127",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "input#127 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputMID#127",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Output#127 Msg ID",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "outputOffset#127",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "output#127 Offset",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  },
+  {
+    "name": "Numbytes#127",
+    "datatype": "uint16",
+    "defaultvalue": 0,
+    "description": "Numbytes#127",
+    "length": 1,
+    "editable": 1,
+    "displaytype": "hex"
+  }
+]
