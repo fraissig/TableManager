@@ -4,11 +4,6 @@
     "datatype": "uint32",
     "defaultvalue": "0x63464531",
     "description": "Identifies the content type (='cFE1'=0x63464531)",
-    "length": 1,
-    "range": [
-      0,
-      "None"
-    ],
     "editable": 0
   },
   {
@@ -16,11 +11,6 @@
     "datatype": "uint32",
     "defaultvalue": 0,
     "description": "Type of ContentType, if necessary",
-    "length": 1,
-    "range": [
-      0,
-      "None"
-    ],
     "editable": 0
   },
   {
@@ -28,11 +18,6 @@
     "datatype": "uint32",
     "defaultvalue": 0,
     "description": "Length of this header to support external processing",
-    "length": 1,
-    "range": [
-      0,
-      "None"
-    ],
     "editable": 0
   },
   {
@@ -40,11 +25,6 @@
     "datatype": "uint32",
     "defaultvalue": 0,
     "description": "Spacecraft that generated the file",
-    "length": 1,
-    "range": [
-      0,
-      "None"
-    ],
     "editable": 1
   },
   {
@@ -52,11 +32,6 @@
     "datatype": "uint32",
     "defaultvalue": 0,
     "description": "Processor that generated the file",
-    "length": 1,
-    "range": [
-      0,
-      "None"
-    ],
     "editable": 1
   },
   {
@@ -64,11 +39,6 @@
     "datatype": "uint32",
     "defaultvalue": 15,
     "description": "Application that generated the file",
-    "length": 1,
-    "range": [
-      0,
-      "None"
-    ],
     "editable": 1
   },
   {
@@ -76,7 +46,6 @@
     "datatype": "uint32",
     "defaultvalue": 0,
     "description": "File creation timestamp from epoch (seconds)",
-    "length": 1,
     "editable": 0,
     "displaytype" : "seconds"
   },
@@ -85,7 +54,6 @@
     "datatype": "uint32",
     "defaultvalue": 0,
     "description": "File creation timestamp from epoch (subseconds)",
-    "length": 1,
     "editable": 0,
     "displaytype": "subseconds"
   },
@@ -102,7 +70,6 @@
     "datatype": "uint32",
     "defaultvalue": 0,
     "description": "Reserved for future",
-    "length": 1,
     "editable": 0
   },
   {
@@ -110,7 +77,6 @@
     "datatype": "uint32",
     "defaultvalue": 0,
     "description": "Byte Offset at which load should commence",
-    "length": 1,
     "editable": 0
   },
   {
@@ -118,7 +84,6 @@
     "datatype": "uint32",
     "defaultvalue": 0,
     "description": "Number of bytes to load into table",
-    "length": 1,
     "editable": 0
   },
   {
