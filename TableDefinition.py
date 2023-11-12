@@ -1,8 +1,6 @@
 import struct
 import json
 
-# TODO gestion des paddings
-
 HEADER_ENCODING="8I32s3I40s"
 
 class TableDefinitionGenericItem(object):
