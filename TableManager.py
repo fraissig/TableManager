@@ -169,15 +169,15 @@ class TableManagerMain(QMainWindow):
 
     def LoadTablesDefinition(self,dirname):
         self.tablesdefinition = {}
-        # TODO error management if dirname not existing
-        for file in os.listdir(dirname):
-            if file.endswith(".json"):
-                self.logger.info("load table definition from file {0}".format(file))
-                tdef=TableDefinition(os.path.join(dirname,file))
-                if tdef:
-                    self.tablesdefinition[tdef.getTableName()]=tdef
-                else:
-                    self.logger.error("No table definition in file {0}".format(file))
+        if os.path.exists(dirname):
+            for file in os.listdir(dirname):
+                if file.endswith(".json"):
+                    self.logger.info("load table definition from file {0}".format(file))
+                    tdef=TableDefinition(os.path.join(dirname,file))
+                    if tdef:
+                        self.tablesdefinition[tdef.getTableName()]=tdef
+                    else:
+                        self.logger.error("No table definition in file {0}".format(file))
         self.statusbar.showMessage("Loading {0} Tables Definition from {1}".format(len(self.tablesdefinition),dirname))
         self.UpdateTablesDefinitionMenu()
 
@@ -277,6 +277,7 @@ class TableManagerMain(QMainWindow):
             filename = QFileDialog.getSaveFileName(self,caption= "Save Binary File as",filter="*.tbl")[0]
             if filename:
                 table.encode(filename)
+        tableview.model()._table.isEdited=False # update isEdited Status
         self.UpdateInfo(idx)
         msg="file {0} saved".format(filename)
         self.statusbar.showMessage(msg)
