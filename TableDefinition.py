@@ -187,7 +187,7 @@ class TableDefinitionEnum32Item(TableDefinitionEnum8Item):
 class TableDefinitionEnum16Item(TableDefinitionEnum8Item):
     def __init__(self):
         super(TableDefinitionEnum16Item,self).__init__()
-        self.datatype="enum32"
+        self.datatype="enum16"
         self.encoding="H"
 
 class TableDefinitionItemFactory(object):
