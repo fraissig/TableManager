@@ -276,8 +276,3 @@ class TableDefinition(object):
         else:
             return None
 
-if __name__=="__main__":
-    tdef=TableDefinition()
-    tdef.loadJSON("./TableDefinitionDir/COM_v1_2_TBL_COM_AJ_K2_NextPermTbl.json")
-    for item in tdef.items:
-        print(item.name, item.datatype, type(item.defaultvalue), item.display(item.defaultvalue))
