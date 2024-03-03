@@ -13,25 +13,36 @@ from TableDefinition import *
 from TableViewer import *
 
 CONFIG_FILENAME="TableManager.ini"
-logging.basicConfig(filename="TableManager.log",
+README_FILENAME="README.md"
+LOGGING_FILENAME="TableManager.log"
+
+logging.basicConfig(filename=LOGGING_FILENAME,
                     format='%(asctime)s - %(message)s',
                     datefmt='%d-%b-%y %H:%M:%S')
 
-class TableDefinitionDialog(QDialog):
-    def __init__(self,parent=None,choices=None):
-        super(TableDefinitionDialog,self).__init__(parent)
-        self.setWindowTitle("Choose Table Definition")
-        self.choice=QComboBox(self)
-        if choices:
-            self.choice.addItems(choices)
-        layout=QVBoxLayout()
-        layout.addWidget(self.choice)
-        buttons=QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
-        buttons.accepted.connect(self.accept)
-        buttons.rejected.connect(self.reject)
-        layout.addWidget(buttons)
+class TableManagerTextDialog(QDialog):
+    def __init__(self,parent,title,filename):
+        super(TableManagerTextDialog,self).__init__(parent)
+        self.setWindowTitle(title)
+        layout = QVBoxLayout()
+        te = QTextEdit()
+        te.setReadOnly(True)
+        te.setAcceptRichText(True)
+        layout.addWidget(te)
+        if os.path.isfile(filename):
+            with open(filename,'r') as fd:
+                text=fd.read()
+            if filename.endswith(".md"):
+                te.setMarkdown(text)
+            else:
+                te.setText(text)
+        else:
+            te.setText("ERROR:\n File {0} doesn't exist".format(filename))
+        button=QDialogButtonBox(QDialogButtonBox.Ok )
+        button.accepted.connect(self.accept)
+        layout.addWidget(button)
         self.setLayout(layout)
-
+        self.adjustSize()
 
 class TableManagerMain(QMainWindow):
     """
@@ -87,7 +98,6 @@ class TableManagerMain(QMainWindow):
         group.setLayout(vbox)
         self.info=QTextEdit(self)
         vbox.addWidget(self.info)
-        #group.setContentsMargins(0,0,10,10)
         layout.addWidget(group)
 
         self.info.setFixedHeight(120)
@@ -114,21 +124,21 @@ class TableManagerMain(QMainWindow):
         filemenu=QMenu("&File",self)
         menuBar.addMenu(filemenu)
         # New Table SubMenu extended by list of Tables Definition
-        self.newSubMenu=QMenu("&New Binary Table", self)
+        self.newSubMenu=QMenu("&New TBL file", self)
         filemenu.addMenu(self.newSubMenu)
         self.newSubMenu.setEnabled(False)
         # Open Table Menu
-        self.openAction=QAction("&Open Binary Table...",self)
+        self.openAction=QAction("&Open TBL file...",self)
         self.openAction.triggered.connect(self.Open)
         filemenu.addAction(self.openAction)
         self.openAction.setEnabled(False)
         # Save Table Menu
-        self.saveAction=QAction("&Save Binary Table",self)
+        self.saveAction=QAction("&Save TBL file",self)
         self.saveAction.triggered.connect(self.Save)
         filemenu.addAction(self.saveAction)
         self.saveAction.setEnabled(False)
         # SaveAs Table Menu
-        self.saveAsAction=QAction("&Save Binary Table As ...",self)
+        self.saveAsAction=QAction("&Save TBL file As ...",self)
         self.saveAsAction.triggered.connect(self.SaveAs)
         filemenu.addAction(self.saveAsAction)
         self.saveAsAction.setEnabled(False)
@@ -156,6 +166,10 @@ class TableManagerMain(QMainWindow):
         helpmenu.addAction(aboutaction)
         helpaction=QAction("Help",self)
         helpmenu.addAction(helpaction)
+        helpaction.triggered.connect(self.Help)
+        logaction=QAction("Display log",self)
+        helpmenu.addAction(logaction)
+        logaction.triggered.connect(self.DisplayLog)
 
     def UpdateTablesDefinitionMenu(self):
         self.newSubMenu.clear()
@@ -173,13 +187,14 @@ class TableManagerMain(QMainWindow):
             for file in os.listdir(dirname):
                 if file.endswith(".json"):
                     self.logger.info("load table definition from file {0}".format(file))
-                    tdef=TableDefinition(os.path.join(dirname,file))
-                    if tdef:
-                        self.tablesdefinition[tdef.getTableName()]=tdef
-                    else:
-                        self.logger.error("No table definition in file {0}".format(file))
-        self.statusbar.showMessage("Loading {0} Tables Definition from {1}".format(len(self.tablesdefinition),dirname))
-        self.UpdateTablesDefinitionMenu()
+                    try:
+                        tdef=TableDefinition(os.path.join(dirname,file))
+                        self.tablesdefinition[tdef.getTableName()] = tdef
+                    except TypeError:
+                        self.statusbar.showMessage("Parsing error during file {0} reading".format(file))
+                        self.logger.error("Uncorrect table definition in file {0}".format(file))
+            self.statusbar.showMessage("Loading {0} Tables Definition from {1}".format(len(self.tablesdefinition),dirname))
+            self.UpdateTablesDefinitionMenu()
 
     def ChangeTablesDefinition(self):
         dirname = str(QFileDialog().getExistingDirectory())
@@ -212,7 +227,7 @@ class TableManagerMain(QMainWindow):
             self.info.setPlainText("No Table Selected")
 
     def SaveAs(self):
-        fileName = QFileDialog.getSaveFileName(self,caption= "Save Binary File as",filter="*.tbl")[0]
+        filename = QFileDialog.getSaveFileName(self,caption= "Save Binary File as",filter="*.tbl")[0]
         if filename:
             self.Save(filename)
 
@@ -250,19 +265,29 @@ class TableManagerMain(QMainWindow):
         filename = QFileDialog.getOpenFileName(filter="*.tbl")[0]
         if filename:
             table=TableObject()
-            tblname = table.decodeTableName(filename)
-            if not tblname in self.tablesdefinition:
-                dlg = QMessageBox.warning(self)
-                dlg.setWindowTitle("No Definition for binary file")
-                dlg.setText("No table definition available for table name '{0}'".format(tblname))
-                dlg.setStandardButtons(QMessageBox.Ok)
-                self.logger.error("file {0} not binary file".format(filename))
-            else:
-                table.loadTableDefinition(self.tablesdefinition[tblname])
-                table.decode(filename)
-                self.CreateTable(table,os.path.basename(filename))
-                self.statusbar.showMessage("file {0} opened with {1} table definition".format(filename,tblname))
-
+            try:
+                tblname = table.decodeTableName(filename)
+                if not tblname in self.tablesdefinition:
+                    dlg = QMessageBox(self)
+                    dlg.setIcon(QMessageBox.Warning)
+                    dlg.setWindowTitle("No Definition for binary file")
+                    dlg.setText("No table definition available for table name '{0}'".format(tblname))
+                    dlg.setStandardButtons(QMessageBox.Ok)
+                    self.logger.error("file {0} not TBL file".format(filename))
+                else:
+                    table.loadTableDefinition(self.tablesdefinition[tblname])
+                    try:
+                        table.decode(filename)
+                        self.CreateTable(table,os.path.basename(filename))
+                        self.statusbar.showMessage("file {0} opened with {1} table definition".format(filename,tblname))
+                    except struct.error:
+                        msg="ERROR reading file {0}".format(filename)
+                        self.statusbar.showMessage(msg)
+                        self.logger.error(msg)
+            except struct.error:
+                msg="ERROR file {0} is not TBL file".format(filename)
+                self.statusbar.showMessage(msg)
+                self.logger.error(msg)
 
     def Save(self,filename=None):
         idx=self.tabs.currentIndex()
@@ -277,12 +302,13 @@ class TableManagerMain(QMainWindow):
             filename = QFileDialog.getSaveFileName(self,caption= "Save Binary File as",filter="*.tbl")[0]
             if filename:
                 table.encode(filename)
-        tableview.model()._table.isEdited=False # update isEdited Status
+        tableview.model()._table.isEdited=False
         self.UpdateInfo(idx)
         msg="file {0} saved".format(filename)
         self.statusbar.showMessage(msg)
         self.logger.info(msg)
         self.tabs.setTabText(self.tabs.currentIndex(),os.path.basename(filename))
+
 
     def Quit(self):
         # check all the tabs before closing window
@@ -299,8 +325,13 @@ class TableManagerMain(QMainWindow):
         button = dlg.exec()
 
     def Help(self):
-        # TODO
-        pass
+        dlg=TableManagerTextDialog(self,"Table Manager Help",README_FILENAME)
+        dlg.exec()
+
+    def DisplayLog(self):
+        dlg=TableManagerTextDialog(self,"Table Manager Logging",LOGGING_FILENAME)
+        dlg.exec()
+
 
 if __name__=="__main__":
     app = QApplication(sys.argv)
