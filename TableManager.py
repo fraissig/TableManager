@@ -319,7 +319,7 @@ class TableManagerMain(QMainWindow):
     def About(self):
         dlg = QMessageBox(self)
         dlg.setWindowTitle("About TableManager")
-        dlg.setText("TableManager\nVersion Alpha")
+        dlg.setText("TableManager\nVersion 0.1\nMarch 2024")
         dlg.setStandardButtons(QMessageBox.Ok)
         dlg.setIcon(QMessageBox.Information)
         button = dlg.exec()
