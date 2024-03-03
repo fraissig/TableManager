@@ -1,13 +1,16 @@
 import struct
 import json
+import re
+import bisect
 
+# corresponds to CFE file primary header and to TBL secondary header
 HEADER_ENCODING="8I32s3I40s"
 
 class TableDefinitionGenericItem(object):
     def __init__(self):
         self.name=""
         self.datatype=""
-        self.defaultvalue=None
+        self.defaultvalue=0
         self.description=""
         self.length=1
         self.datarange= []
@@ -26,7 +29,7 @@ class TableDefinitionGenericItem(object):
         return valuestr
 
     def bytesSize(self):
-        return struct.calcsize(self.encoding)
+        return struct.calcsize(">"+self.encoding)
 
     def maxi(self):
         pass
@@ -42,6 +45,7 @@ class TableDefinitionGenericItem(object):
 
     def display(self,value):
         return str(value)
+
 
 class TableDefinitionUint8Item(TableDefinitionGenericItem):
     def __init__(self):
@@ -76,6 +80,21 @@ class TableDefinitionUint8Item(TableDefinitionGenericItem):
             return hex(value)
         else:
             return value
+
+class TableDefinitionUint24Item(TableDefinitionUint8Item):
+    # for padding 24 bits
+    def __init__(self):
+        super(TableDefinitionUint24Item,self).__init__()
+        self.datatype="uint24"
+        self.encoding="BH"
+        self.defaultvalue=0
+
+    def decode(self,value):
+        return 0
+
+    def encode(self,value):
+        return (0,0)
+
 
 class TableDefinitionInt8Item(TableDefinitionUint8Item):
     def __init__(self):
@@ -124,6 +143,12 @@ class TableDefinitionFloatItem(TableDefinitionUint8Item):
             return float(valuestr)
         else:
             return 0.0
+
+class TableDefinitionFloat16Item(TableDefinitionFloatItem):
+    def __init__(self):
+        super(TableDefinitionFloat16Item,self).__init__()
+        self.datatype="float16"
+        self.encoding="e"
 
 class TableDefinitionLongFloatItem(TableDefinitionFloatItem):
     def __init__(self):
@@ -190,6 +215,7 @@ class TableDefinitionEnum16Item(TableDefinitionEnum8Item):
         self.datatype="enum16"
         self.encoding="H"
 
+
 class TableDefinitionItemFactory(object):
     def __init__(self):
         self.definitionlist=[TableDefinitionUint8Item,TableDefinitionUint16Item,
@@ -197,24 +223,34 @@ class TableDefinitionItemFactory(object):
                             TableDefinitionStringItem,TableDefinitionEnum8Item,
                              TableDefinitionLongFloatItem,TableDefinitionInt8Item,
                              TableDefinitionEnum32Item,TableDefinitionEnum16Item,
-                             TableDefinitionUint64Item]
+                             TableDefinitionUint64Item,TableDefinitionUint24Item]
         self.tdefs={td().datatype:td for td in self.definitionlist}
+        self.tdefs.update({'float16':TableDefinitionFloat16Item,
+                           'float32':TableDefinitionFloatItem,
+                           'raw24':TableDefinitionUint24Item})
+
+    def datatypes(self):
+        return sorted(self.tdefs.keys())
 
     def create(self,data):
         tdg=TableDefinitionGenericItem()
         tdg.parse(data)
+        m=re.match("^char(\d+)",tdg.datatype)
+        if m:
+            tdg.datatype='string'
+            tdg.length=m.group(1)
         try:
             tdef=self.tdefs[tdg.datatype]()
             tdef.parse(data)
             return tdef
         except KeyError:
-            #print(tdg.datatype,tdg.name)
             return None
 
 class TableDefinition(object):
     def __init__(self,filename=None):
         self.items = []
         self.loadJSON(filename)
+        self.saved=False
 
     def loadJSON(self,filename):
         if filename:
@@ -227,11 +263,17 @@ class TableDefinition(object):
                 if item:
                     item.defaultvalue=item.cast(item.defaultvalue)
                     self.items.append(item)
+                else:
+                    raise TypeError
             # Define the number of Bytes to be loaded
             # assume to be total size - header size
             idx=self.findIndex("NumBytes")
             self.items[idx].defaultvalue=self.bytesSize()-struct.calcsize(HEADER_ENCODING)
         self.filename=filename
+        self.saved=True
+
+    def __len__(self):
+        return len(self.items)
 
     def getTableName(self):
         return self.items[self.findIndex("TableName")].defaultvalue
@@ -254,16 +296,29 @@ class TableDefinition(object):
         fmt=[convention]
         fmt.extend([item.encoding for item in self.items])
         data=list(struct.unpack("".join(fmt),buffer[:self.bytesSize()]))
-        for i,item in enumerate(self.items):
+        result=[]
+        i=0
+        for item in self.items:
             if item.datatype=="string":
-                data[i]=item.decode(data[i])
-        return data
+                result.append(item.decode(data[i]))
+                i+=1
+            elif isinstance(item,TableDefinitionUint24Item):
+                result.append(data[i])
+                i+=2
+            else:
+                result.append(data[i])
+                i+=1
+        return result
 
     def encode(self,values,bigendian=True):
         convention =">" if bigendian else "<"
         buffer = bytearray()
         for item,value in zip(self.items,values):
-            buffer.extend(struct.pack(convention +item.encoding ,item.encode(value)))
+            x=item.encode(value)
+            if isinstance(item,TableDefinitionUint24Item):
+                buffer.extend(struct.pack(convention +item.encoding ,*x))
+            else:
+                buffer.extend(struct.pack(convention + item.encoding, x))
         return buffer
 
     def decodeTableName(self,buffer,bigendian=True):
@@ -271,8 +326,7 @@ class TableDefinition(object):
         header=convention+HEADER_ENCODING
         headersize=struct.calcsize(header)
         if len(buffer) >= headersize:
-            data=struct.unpack(header,buffer[:headersize])
-            return data[12].decode('utf-8').replace("\x00","")
+            data=list(struct.unpack(header,buffer[:headersize]))
+            return data[12].decode("utf-8").replace("\x00","")
         else:
             return None
-
