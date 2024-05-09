@@ -1,6 +1,8 @@
 import datetime
 from TableDefinition import *
 from TableCRC import crc16arc
+import os
+JD2000 = datetime.datetime(2000, 1, 1, 11, 58, 56, 816000)
 
 class TableObject(object):
     """
@@ -9,22 +11,24 @@ class TableObject(object):
      - a values list, with the current values modified by the user
      - the current file name from decode or from encode
     """
-    def __init__(self ,tabledef=None):
+    def __init__(self,tabledef=None):
         self.values=[]
-        self.tabledef=TableDefinition()
         if tabledef:
             self.loadTableDefinition(tabledef)
+        else:
+            self.tabledef = TableDefinition()
         self.isEdited =False
         self.currentfilename=None
         self.crc=None
 
     def info(self):
-        infos={"Table Name           ":self.tabledef.getTableName(),
+        crc=self.calculateCRC()
+        infos={"Table Name           ": self.tabledef.getTableName(),
                "Table Definition Path": self.tabledef.filename,
-               "Bytes Size           ": self.tabledef.bytesSize(),
+               "Total Bytes Size     ": self.tabledef.bytesSize(),
                "Current File Name    ": self.currentfilename,
                "Creation Date        ": self.getTableTime(),
-               "Current CRC          ": "0x{:04x}".format(self.calculateCRC())}
+               "Current CRC          ": "0x{:04x}".format(crc) if crc!=None else "ERROR"}
         return "\n".join(["{0}:\t{1}".format(k,v) for k,v in infos.items()])
 
     def loadTableDefinition(self, tabledef):
@@ -38,15 +42,14 @@ class TableObject(object):
         i = self.tabledef.findIndex("TimeSeconds")
         j = self.tabledef.findIndex("TimeSubSeconds")
         if i and j:
-            return datetime.datetime(2000, 1, 1, 11, 58, 56, 816000)+datetime.timedelta(seconds=self.values[i],
-                                                                                        microseconds=self.values[j])
+            return JD2000+datetime.timedelta(seconds=self.values[i],microseconds=self.values[j])
 
     def setCurrentTime(self):
         # --- Timestamp compared to reference Epoch (1 jan 2000 11:58:56.816)
         i = self.tabledef.findIndex("TimeSeconds")
         j = self.tabledef.findIndex("TimeSubSeconds")
         if i and j:
-            dt = datetime.datetime.now() - datetime.datetime(2000, 1, 1, 11, 58, 56, 816000)
+            dt = datetime.datetime.now() - JD2000
             self.values[i] = dt.days * 86400 + dt.seconds
             self.values[j] = dt.microseconds
 
@@ -60,19 +63,44 @@ class TableObject(object):
     def set(self ,row ,valuestr):
         self.isEdited =True
         item = self.tabledef.items[row]
-        self.values[row]=item.cast(valuestr)
+        value = item.cast(valuestr)
+        if value!=None:
+            self.values[row]=value
+            return True
+        return False
 
     def calculateCRC(self,bigendian=True):
         # compute CRC without table headers
         buffer=self.tabledef.encode(self.values,bigendian)
-        return crc16arc(buffer[struct.calcsize(HEADER_ENCODING):])
+        if buffer:
+            return crc16arc(buffer[struct.calcsize(HEADER_ENCODING):])
+        else:
+            return None
 
-    def encode(self,filename,bigendian=True):
-        # TODO : update offset & bitssize
+
+    def encode(self,filename,offset=0,nbytes=None,bigendian=True):
         self.setCurrentTime()
-        with open(filename,'wb') as fd:
-            fd.write(self.tabledef.encode(self.values,bigendian))
-        self.currentfilename=filename
+        if offset==0 and nbytes==None:
+            buffer = self.tabledef.encode(self.values, bigendian)
+            new_tabledef = None
+        else:
+            new_tabledef,indexes=self.tabledef.reduceTo(offset,nbytes)
+            new_values=self.values.copy()
+            idx=new_tabledef.findIndex("NumBytes")
+            new_values[idx]=nbytes
+            idx=new_tabledef.findIndex("Offset")
+            new_values[idx]=offset
+            buffer=new_tabledef.encode([new_values[i] for i in indexes],bigendian)
+        if buffer:
+            with open(filename, 'wb') as fd:
+                fd.write(buffer)
+            if not new_tabledef:
+                self.currentfilename = filename
+                return False
+            else:
+                return True
+        else:
+            raise ValueError("Error during encoding {0}".format(os.path.basename(filename)))
 
     def decodeTableName(self ,filename,bigendian=True):
         with open(filename,'rb') as fd:
@@ -84,24 +112,17 @@ class TableObject(object):
         with open(filename,'rb') as fd:
             buffer=fd.read()
         self.currentfilename=filename
-        self.values=self.tabledef.decode(buffer,bigendian)
+        offset,nbytes=self.tabledef.decodeOffsetAndNumBytes(buffer,bigendian)
+        new_tabledef,indexes=self.tabledef.reduceTo(offset,nbytes)
+        self.values=new_tabledef.decode(buffer,bigendian)
+        self.tabledef=new_tabledef
 
     def copyText(self):
-        return self.info()+"\n\n"+str(self)
+        return str(self)
 
     def __repr__(self):
-        s=["Name\tDescription\tDataType\tValue"]
-        s.extend(["{0}\t{1}\t{2}\t{3}".format(item.name,
-                                              item.description,
-                                              item.datatype,
-                                              item.display(v)) for item,v in zip(self.tabledef.items,self.values)])
+        s=["Name\tValue"]
+        s.extend(["{0}\t{1}".format(item.name,item.display(v)) for item,v in zip(self.tabledef.items,self.values)])
         return "\n".join(s)
 
-if __name__=="__main__":
-    import os
-    filename="RIDU_v0_6_TBL_RID_AJ_RtAddr.tbl"
-    directory="./TableDefinitionDir"
-    t=TableObject(TableDefinition(os.path.join(directory,"RIDU_v0_6_TBL_RID_AJ_RtAddr.json")))
-    t.setCurrentTime()
-    t.encode(filename)
-    print(t.info())
+
