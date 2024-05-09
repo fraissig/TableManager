@@ -1,6 +1,6 @@
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QValidator,QIntValidator,QBrush,QClipboard
+from PyQt5.QtGui import QColor,QKeySequence
 from PyQt5.Qt import QApplication
 from functools import partial
 
@@ -18,7 +18,8 @@ LOGGING_FILENAME="TableManager.log"
 
 logging.basicConfig(filename=LOGGING_FILENAME,
                     format='%(asctime)s - %(message)s',
-                    datefmt='%d-%b-%y %H:%M:%S')
+                    datefmt='%d-%b-%y %H:%M:%S',
+                    filemode="w")
 
 class TableManagerTextDialog(QDialog):
     def __init__(self,parent,title,filename):
@@ -42,6 +43,7 @@ class TableManagerTextDialog(QDialog):
         button.accepted.connect(self.accept)
         layout.addWidget(button)
         self.setLayout(layout)
+        self.setMinimumSize(500,500)
         self.adjustSize()
 
 class TableManagerMain(QMainWindow):
@@ -87,7 +89,7 @@ class TableManagerMain(QMainWindow):
         self.window=QWidget()
         self.setCentralWidget(self.window)
         self.setWindowTitle("TableManager")
-        self.setMinimumSize(QSize(600, 500))
+        self.setMinimumSize(QSize(600, 600))
         # Layout
         layout = QVBoxLayout()
         self.window.setLayout(layout)
@@ -103,6 +105,7 @@ class TableManagerMain(QMainWindow):
         self.info.setFixedHeight(120)
         self.info.setReadOnly(True)
         self.info.setPlainText("No Table Selected")
+        self.info.setTextColor(QColor(0, 200, 100))
 
         # Tabs view
         self.tabs=QTabWidget(self)
@@ -130,11 +133,13 @@ class TableManagerMain(QMainWindow):
         # Open Table Menu
         self.openAction=QAction("&Open TBL file...",self)
         self.openAction.triggered.connect(self.Open)
+        self.openAction.setShortcut(QKeySequence(Qt.CTRL+Qt.Key_O))
         filemenu.addAction(self.openAction)
         self.openAction.setEnabled(False)
         # Save Table Menu
         self.saveAction=QAction("&Save TBL file",self)
         self.saveAction.triggered.connect(self.Save)
+        self.saveAction.setShortcut(QKeySequence(Qt.CTRL+Qt.Key_S))
         filemenu.addAction(self.saveAction)
         self.saveAction.setEnabled(False)
         # SaveAs Table Menu
@@ -151,14 +156,28 @@ class TableManagerMain(QMainWindow):
         filemenu.addSeparator()
         exitAction=QAction("&Quit",self)
         exitAction.triggered.connect(self.Quit)
+        exitAction.setShortcut(QKeySequence(Qt.CTRL+Qt.Key_Q))
         filemenu.addAction(exitAction)
-        # Edit Menu
+        # --------- Edit Menu ----------
         editmenu=QMenu("Edit",self)
         menuBar.addMenu(editmenu)
+        undoaction=QAction("Undo",self)
+        undoaction.triggered.connect(self.Undo)
+        undoaction.setShortcut(QKeySequence(Qt.CTRL+Qt.Key_Z))
+        editmenu.addAction(undoaction)
+        redoaction=QAction("Redo",self)
+        redoaction.triggered.connect(self.Redo)
+        redoaction.setShortcut(QKeySequence(Qt.CTRL+Qt.Key_Y))
+        editmenu.addAction(redoaction)
         copyaction=QAction("Copy to Clipboard",self)
-        copyaction.triggered.connect(self.CopyClipboard)
+        copyaction.triggered.connect(self.CopyToClipboard)
+        copyaction.setShortcut(QKeySequence(Qt.CTRL+Qt.Key_C))
         editmenu.addAction(copyaction)
-        # Help Menu
+        pasteaction=QAction("Paste from Clipboard",self)
+        pasteaction.setShortcut(QKeySequence(Qt.CTRL+Qt.Key_V))
+        pasteaction.triggered.connect(self.PasteFromClipboard)
+        editmenu.addAction(pasteaction)
+        # ------------ Help Menu -------------
         helpmenu=QMenu("Help",self)
         menuBar.addMenu(helpmenu)
         aboutaction=QAction("About",self)
@@ -173,13 +192,24 @@ class TableManagerMain(QMainWindow):
 
     def UpdateTablesDefinitionMenu(self):
         self.newSubMenu.clear()
-        actions={k:partial(self.New,k) for k in sorted(self.tablesdefinition.keys())}
-        for k,f in actions.items():
-            self.newSubMenu.addAction(k,f)
-        self.saveAsAction.setEnabled(True)
-        self.saveAction.setEnabled(True)
+        submenus={}
+        for name in sorted(self.tablesdefinition.keys()):
+            submenus.setdefault(name.split('.')[0],[]).append((name,partial(self.New,name)))
+        for family in sorted(submenus.keys()):
+            actions=submenus[family]
+            menu = QMenu(family, self)
+            for action in actions:
+                menu.addAction(*action)
+            self.newSubMenu.addMenu(menu)
+        if len(self.tablesdefinition)>0:
+            self.saveAsAction.setEnabled(True)
+            self.saveAction.setEnabled(True)
+            self.openAction.setEnabled(True)
+        else:
+            self.saveAsAction.setEnabled(False)
+            self.saveAction.setEnabled(False)
+            self.openAction.setEnabled(False)
         self.newSubMenu.setEnabled(True)
-        self.openAction.setEnabled(True)
 
     def LoadTablesDefinition(self,dirname):
         self.tablesdefinition = {}
@@ -190,13 +220,24 @@ class TableManagerMain(QMainWindow):
                     try:
                         tdef=TableDefinition(os.path.join(dirname,file))
                         self.tablesdefinition[tdef.getTableName()] = tdef
-                    except TypeError:
+                    except TypeError as err:
                         self.statusbar.showMessage("Parsing error during file {0} reading".format(file))
                         self.logger.error("Uncorrect table definition in file {0}".format(file))
+                        self.logger.error(err)
             self.statusbar.showMessage("Loading {0} Tables Definition from {1}".format(len(self.tablesdefinition),dirname))
-            self.UpdateTablesDefinitionMenu()
+        self.UpdateTablesDefinitionMenu()
 
     def ChangeTablesDefinition(self):
+        idx=self.tabs.currentIndex()
+        if idx!=-1:
+            dlg = QMessageBox(self)
+            dlg.setWindowTitle("Change Table Definition")
+            dlg.setText("All the tables already open will be closed without saving. Do you want to continue ?")
+            dlg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+            if dlg.exec() == QMessageBox.Ok:
+                while idx!=-1:
+                    self.tabs.removeTab(idx)
+                    idx=self.tabs.currentIndex()
         dirname = str(QFileDialog().getExistingDirectory())
         config = configparser.ConfigParser()
         config['TableDefinitionDir']={'path': dirname}
@@ -204,6 +245,7 @@ class TableManagerMain(QMainWindow):
         with open(CONFIG_FILENAME, 'w') as fd:
             config.write(fd)
         self.LoadTablesDefinition(dirname)
+
 
     def CreateTable(self,table,name):
         # Table View creation
@@ -215,19 +257,18 @@ class TableManagerMain(QMainWindow):
         tableview.resizeColumnToContents(0)
         tableview.resizeColumnToContents(3)
         self.tabs.setCurrentIndex(self.tabs.addTab(tableview,name))
-        self.adjustSize()
 
     def UpdateInfo(self,idx=None):
         if not idx:
             idx=self.tabs.currentIndex()
         tableview = self.tabs.widget(idx)
         if tableview:
-            self.info.setPlainText(tableview.model()._table.info())
+            self.info.setPlainText(tableview.model().getInfo())
         else:
             self.info.setPlainText("No Table Selected")
 
     def SaveAs(self):
-        filename = QFileDialog.getSaveFileName(self,caption= "Save Binary File as",filter="*.tbl")[0]
+        filename = QFileDialog.getSaveFileName(self,caption= "Save TBL File as",filter="*.tbl")[0]
         if filename:
             self.Save(filename)
 
@@ -240,18 +281,58 @@ class TableManagerMain(QMainWindow):
                 dlg.setText("File not saved. Do you want to continue ?")
                 dlg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
                 if dlg.exec()==QMessageBox.Ok:
+                    name=self.tabs.tabText(idx)
                     self.tabs.removeTab(idx)
-                    self.logger.warning("tab {0} not saved".format(self.tabs.currentIndex()))
+                    self.logger.warning("tab {0} not saved".format(name))
             else:
                 self.tabs.removeTab(idx)
 
-    def CopyClipboard(self):
+    def CopyToClipboard(self):
         tableview=self.tabs.widget(self.tabs.currentIndex())
         clipboard=QApplication.clipboard()
-        clipboard.setText(tableview.model()._table.copyText())
-        msg="{0} copied to clipboard".format(self.tabs.tabText(self.tabs.currentIndex()))
+        clipboard.setText(tableview.model().copyText())
+        msg="Table {0} copied to clipboard".format(self.tabs.tabText(self.tabs.currentIndex()))
         self.logger.info(msg)
         self.statusbar.showMessage(msg)
+
+    def PasteFromClipboard(self):
+        itab=self.tabs.currentIndex()
+        if itab!=-1:
+            tableview=self.tabs.widget(itab)
+            model=tableview.model()
+            clipboard=QApplication.clipboard()
+            mimeData = clipboard.mimeData()
+            if mimeData.hasText():
+                cnt=0
+                for line in mimeData.text().split('\n'):
+                    name,valuestr=line.split()
+                    idx=model.findIndex(name)
+                    if idx:
+                        logging.info("{0} found".format(name),valuestr)
+                        if model.setData(model.index(idx,0),valuestr,Qt.EditRole):
+                            cnt+=1
+                        else:
+                            logging.error("{0} value error {1}".format(name,valuestr))
+                    else:
+                        logging.error("{0} not found".format(name),valuestr)
+                msg="{0} values pasted".format(cnt)
+                logging.info(msg)
+                self.statusbar.showMessage(msg)
+
+    def Redo(self):
+        self.Do(False)
+
+    def Undo(self):
+        self.Do(True)
+
+    def Do(self,undo=True):
+        itab = self.tabs.currentIndex()
+        if itab != -1:
+            tableview=self.tabs.widget(itab)
+            if undo:
+                tableview.model().stack.undo()
+            else:
+                tableview.model().stack.redo()
 
     def New(self,tblname):
         tdef=self.tablesdefinition[tblname]
@@ -263,17 +344,17 @@ class TableManagerMain(QMainWindow):
 
     def Open(self):
         filename = QFileDialog.getOpenFileName(filter="*.tbl")[0]
+        self.Open_file(filename)
+
+    def Open_file(self,filename):
         if filename:
             table=TableObject()
             try:
                 tblname = table.decodeTableName(filename)
                 if not tblname in self.tablesdefinition:
-                    dlg = QMessageBox(self)
-                    dlg.setIcon(QMessageBox.Warning)
-                    dlg.setWindowTitle("No Definition for binary file")
-                    dlg.setText("No table definition available for table name '{0}'".format(tblname))
-                    dlg.setStandardButtons(QMessageBox.Ok)
-                    self.logger.error("file {0} not TBL file".format(filename))
+                    msg="No table definition available for table name '{0}'".format(tblname)
+                    self.statusbar.showMessage(msg)
+                    self.logger.error(msg)
                 else:
                     table.loadTableDefinition(self.tablesdefinition[tblname])
                     try:
@@ -292,22 +373,38 @@ class TableManagerMain(QMainWindow):
     def Save(self,filename=None):
         idx=self.tabs.currentIndex()
         tableview=self.tabs.widget(idx)
-        table=tableview.model()._table
-        if table.currentfilename and not filename:
-            table.encode(table.currentfilename)
-            filename=table.currentfilename
-        elif filename:
-            table.encode(filename)
+        selectedrows=tableview.selectionModel().selectedRows()
+        if len(selectedrows)>0:
+            indexes=[index.row() for index in selectedrows if tableview.model().getItem(index.row()).offset>=0]
+            offset=min([tableview.model().getItem(idx).offset for idx in indexes])
+            numbytes=sum([tableview.model().getItem(idx).bytesSize() for idx in range(min(indexes),max(indexes)+1)])
         else:
-            filename = QFileDialog.getSaveFileName(self,caption= "Save Binary File as",filter="*.tbl")[0]
-            if filename:
-                table.encode(filename)
-        tableview.model()._table.isEdited=False
-        self.UpdateInfo(idx)
-        msg="file {0} saved".format(filename)
-        self.statusbar.showMessage(msg)
-        self.logger.info(msg)
-        self.tabs.setTabText(self.tabs.currentIndex(),os.path.basename(filename))
+            offset=0
+            numbytes=None
+
+        if not filename:
+            filename=tableview.model().getCurrentFilename()
+            if not filename:
+                # define a new filename
+                filename = QFileDialog.getSaveFileName(self,caption= "Save TBL File as",filter="*.tbl")[0]
+        if filename:
+            if not filename.endswith('.tbl'):
+                filename+='.tbl'
+            try:
+                is_new_tabledef=tableview.model().encode(filename,offset,numbytes)
+                self.UpdateInfo(idx)
+                msg="file {0} saved".format(filename)
+                self.statusbar.showMessage(msg)
+                self.logger.info(msg)
+                if is_new_tabledef:
+                    self.Open_file(filename)
+                else:
+                    self.tabs.setTabText(self.tabs.currentIndex(),os.path.basename(filename))
+            except ValueError as err:
+                self.statusbar.showMessage(str(err))
+                self.logger.error(str(err))
+        else:
+            self.statusbar.showMessage("No file saved")
 
 
     def Quit(self):
@@ -319,7 +416,8 @@ class TableManagerMain(QMainWindow):
     def About(self):
         dlg = QMessageBox(self)
         dlg.setWindowTitle("About TableManager")
-        dlg.setText("TableManager\nVersion 0.1\nMarch 2024")
+        dlg.setTextFormat(Qt.RichText)
+        dlg.setText("<h1>TableManager</h1><br>Version 1.0<br>May 2024<br><br><a href='https://github.com/FRAISSIG/TableManager'>source code on Github</a>")
         dlg.setStandardButtons(QMessageBox.Ok)
         dlg.setIcon(QMessageBox.Information)
         button = dlg.exec()
