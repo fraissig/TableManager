@@ -1,10 +1,11 @@
 # TableManager
-This python tool allows to manage cFE Table binary file as defined in cFS Framework https://github.com/nasa/cfs .
+This python tool allows to manage cFE Table binary file .tbl as defined in cFS Framework https://github.com/nasa/cfs .
 The TableManager tool is based on Table Definition JSON file, to decode and to encode cFE Table as a binary file.
 The tool is coded in Python (>=3.9) and requires PyQt5 for the Graphical User Interface.
 
 ## Menus
 ### *File Menu*
+
 **> New TBL File** 
 : create a new table based on table definition selected in the submenu
 
@@ -22,10 +23,23 @@ The tool is coded in Python (>=3.9) and requires PyQt5 for the Graphical User In
 
 **> Quit** 
 : Quit the application
+
 ### *Edit Menu*
+
+**> Undo** 
+: undo the current modification in the selected table
+
+**> Redo** 
+: redo the previous modification in the selected table
+
 **> Copy to clipboard** 
-: copy the current table in the clipboard
+: copy the current table content (names,values) in the clipboard
+
+**> Paste from clipboard**
+: paste table with columns (names,values) in the current table from the clipboard
+
 ### *Help Menu*
+
 **> About** 
 : display the application name and version
 
@@ -56,7 +70,7 @@ Available datatype
 ------------------
 * "uint8" : unsigned integer 8 bits
 * "uint16": unsigned integer 16 bits
-* "uint24": unsigned interger 24 bits 
+* "uint24": unsigned interger 24 bits (for padding) 
 * "uint32": unsigned integer 32 bits
 * "uint64": unsigned integer 64 bits
 * "int8"  : signed integer 8 bits
@@ -65,5 +79,5 @@ Available datatype
 * "enum32": enumerated values coded 32 bits
 * "float16": floating value (16 bits)
 * "float" : floating value (32 bits)
-* "double": floating value (64 bits)
-* "string": String with length to be defined
+* "double","double64": floating value (64 bits)
+* "string": String with "length" to be defined
