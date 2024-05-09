@@ -17,6 +17,7 @@ class TableDefinitionGenericItem(object):
         self.editable=1
         self.displaytype=""
         self.encoding="B"
+        self.offset=0
 
     def parse(self,data):
         for key,value in data.items():
@@ -69,9 +70,13 @@ class TableDefinitionUint8Item(TableDefinitionGenericItem):
             if valuestr.lower().startswith("0x"):
                 return eval(valuestr)
             elif valuestr!='':
-                return int(valuestr)
+                v=int(valuestr)
+                if v<0:
+                    return None
+                else:
+                    return v
             else:
-                return 0
+                return None
         else:
             return valuestr
 
@@ -80,6 +85,9 @@ class TableDefinitionUint8Item(TableDefinitionGenericItem):
             return hex(value)
         else:
             return value
+
+    def encode(self,value):
+        return int(value)
 
 class TableDefinitionUint24Item(TableDefinitionUint8Item):
     # for padding 24 bits
@@ -144,6 +152,9 @@ class TableDefinitionFloatItem(TableDefinitionUint8Item):
         else:
             return 0.0
 
+    def encode(self,value):
+        return float(value)
+
 class TableDefinitionFloat16Item(TableDefinitionFloatItem):
     def __init__(self):
         super(TableDefinitionFloat16Item,self).__init__()
@@ -189,6 +200,7 @@ class TableDefinitionEnum8Item(TableDefinitionGenericItem):
 
     def parse(self,data):
         super(TableDefinitionEnum8Item,self).parse(data)
+        self.datarange={"{0} [{1}]".format(k,v):v for k,v in self.datarange.items()}
         self.reverse={v:k for k,v in self.datarange.items()}
 
     def cast(self,valuestr):
@@ -202,6 +214,9 @@ class TableDefinitionEnum8Item(TableDefinitionGenericItem):
             return self.reverse[value]
         except KeyError:
             return "ERROR"
+
+    def encode(self,value):
+        return int(value)
 
 class TableDefinitionEnum32Item(TableDefinitionEnum8Item):
     def __init__(self):
@@ -227,6 +242,8 @@ class TableDefinitionItemFactory(object):
         self.tdefs={td().datatype:td for td in self.definitionlist}
         self.tdefs.update({'float16':TableDefinitionFloat16Item,
                            'float32':TableDefinitionFloatItem,
+                           'double64':TableDefinitionLongFloatItem,
+                           'double':TableDefinitionLongFloatItem,
                            'raw24':TableDefinitionUint24Item})
 
     def datatypes(self):
@@ -264,11 +281,13 @@ class TableDefinition(object):
                     item.defaultvalue=item.cast(item.defaultvalue)
                     self.items.append(item)
                 else:
-                    raise TypeError
+                    raise TypeError(itemdata)
             # Define the number of Bytes to be loaded
             # assume to be total size - header size
             idx=self.findIndex("NumBytes")
             self.items[idx].defaultvalue=self.bytesSize()-struct.calcsize(HEADER_ENCODING)
+            # Update Offset in bytes for each item
+            self.setOffset()
         self.filename=filename
         self.saved=True
 
@@ -279,7 +298,7 @@ class TableDefinition(object):
         return self.items[self.findIndex("TableName")].defaultvalue
 
     def findIndex(self,name):
-        res=[i for i,item in enumerate(self.items) if item.name==name]
+        res=[i for i,item in enumerate(self.items) if item.name.lower()==name.lower()]
         return res[0] if len(res) else None
 
     def get(self,attr):
@@ -290,6 +309,34 @@ class TableDefinition(object):
 
     def bytesSize(self):
         return sum([item.bytesSize() for item in self.items])
+
+    def setOffset(self):
+        offset=0
+        headersize=struct.calcsize(HEADER_ENCODING)
+        for i in range(len(self.items)):
+            self.items[i].offset=offset-headersize
+            offset+=self.items[i].bytesSize()
+        return True
+
+    def reduceTo(self,offset,nbytes):
+        partial=TableDefinition()
+        if not nbytes:
+            nbytes=self.items[self.findIndex("NumBytes")].defaultvalue
+        totalbytes=0
+        indexes=[]
+        for idx,item in enumerate(self.items):
+            if item.offset<0:
+                partial.items.append(item)
+                indexes.append(idx)
+            elif (item.offset>=offset and (totalbytes+item.bytesSize())<=nbytes):
+                partial.items.append(item)
+                indexes.append(idx)
+                totalbytes += item.bytesSize()
+        idx = partial.findIndex("NumBytes")
+        partial.items[idx].defaultvalue = partial.bytesSize() - struct.calcsize(HEADER_ENCODING)
+        idx = partial.findIndex("Offset")
+        partial.items[idx].defaultvalue = offset
+        return partial,indexes
 
     def decode(self,buffer,bigendian=True):
         convention =">" if bigendian else "<"
@@ -313,20 +360,34 @@ class TableDefinition(object):
     def encode(self,values,bigendian=True):
         convention =">" if bigendian else "<"
         buffer = bytearray()
-        for item,value in zip(self.items,values):
-            x=item.encode(value)
-            if isinstance(item,TableDefinitionUint24Item):
-                buffer.extend(struct.pack(convention +item.encoding ,*x))
-            else:
-                buffer.extend(struct.pack(convention + item.encoding, x))
-        return buffer
+        try:
+            for item,value in zip(self.items,values):
+                x=item.encode(value)
+                if isinstance(item,TableDefinitionUint24Item):
+                    buffer.extend(struct.pack(convention +item.encoding ,*x))
+                else:
+                    buffer.extend(struct.pack(convention + item.encoding, x))
+            return buffer
+        except struct.error:
+            return None
 
-    def decodeTableName(self,buffer,bigendian=True):
+    def decodeHeader(self,buffer,bigendian=True):
         convention =">" if bigendian else "<"
         header=convention+HEADER_ENCODING
         headersize=struct.calcsize(header)
         if len(buffer) >= headersize:
             data=list(struct.unpack(header,buffer[:headersize]))
-            return data[12].decode("utf-8").replace("\x00","")
+            return data
         else:
             return None
+
+    def decodeTableName(self,buffer,bigendian=True):
+        data=self.decodeHeader(buffer,bigendian)
+        return data[12].decode("utf-8").replace("\x00","") if data else None
+
+    def decodeOffsetAndNumBytes(self,buffer,bigendian=True):
+        data=self.decodeHeader(buffer,bigendian)
+        return (data[10],data[11]) if data else None
+
+    def __repr__(self):
+        return '\n'.join(['{0}\t{1}'.format(item.name,item.defaultvalue) for item in self.items])
