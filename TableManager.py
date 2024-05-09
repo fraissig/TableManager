@@ -5,7 +5,6 @@ from PyQt5.Qt import QApplication
 from functools import partial
 
 import sys
-import os
 import logging
 import configparser
 from TableObject import *
@@ -105,7 +104,7 @@ class TableManagerMain(QMainWindow):
         self.info.setFixedHeight(120)
         self.info.setReadOnly(True)
         self.info.setPlainText("No Table Selected")
-        self.info.setTextColor(QColor(0, 200, 100))
+        self.info.setTextBackgroundColor(QColor(145,145,1))
 
         # Tabs view
         self.tabs=QTabWidget(self)
@@ -374,14 +373,14 @@ class TableManagerMain(QMainWindow):
         idx=self.tabs.currentIndex()
         tableview=self.tabs.widget(idx)
         selectedrows=tableview.selectionModel().selectedRows()
+        # default values
+        offset = 0; numbytes = None
+        # check if selected rows outside table headers and set offset & numbytes accordingly
         if len(selectedrows)>0:
             indexes=[index.row() for index in selectedrows if tableview.model().getItem(index.row()).offset>=0]
-            offset=min([tableview.model().getItem(idx).offset for idx in indexes])
-            numbytes=sum([tableview.model().getItem(idx).bytesSize() for idx in range(min(indexes),max(indexes)+1)])
-        else:
-            offset=0
-            numbytes=None
-
+            if len(indexes)>0:
+                offset=min([tableview.model().getItem(idx).offset for idx in indexes])
+                numbytes=sum([tableview.model().getItem(idx).bytesSize() for idx in range(min(indexes),max(indexes)+1)])
         if not filename:
             filename=tableview.model().getCurrentFilename()
             if not filename:

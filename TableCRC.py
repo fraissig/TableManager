@@ -39,3 +39,4 @@ def crc16arc(buffer):
         idx = (crcValue ^ b) & 0xFF
         crcValue = ((crcValue >> 8) & 0xFF) ^ crc16tab[idx]
     return crcValue
+
