@@ -39,10 +39,3 @@ def crc16arc(buffer):
         idx = (crcValue ^ b) & 0xFF
         crcValue = ((crcValue >> 8) & 0xFF) ^ crc16tab[idx]
     return crcValue
-
-if __name__=="__main__":
-    filename="hk_cpy_tbl.tbl"
-    with open(filename,"rb") as fd:
-        fd.seek(struct.calcsize("8I32s3I40s"))
-        buffer=fd.read()
-    print(hex(crc16arc(buffer)))
