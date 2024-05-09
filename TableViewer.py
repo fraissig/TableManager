@@ -1,7 +1,7 @@
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QValidator,QIntValidator,QBrush
-import re
+
 
 class CustomIntValidator(QValidator):
     def __init__(self,mini,maxi):
@@ -68,6 +68,7 @@ class CustomTableModel(QAbstractTableModel):
         QAbstractTableModel.__init__(self, parent)
         self._table=table
         self.columns=["Name","Description","Datatype","Value"]
+        self.stack = QUndoStack()
 
     def flags(self, index):
         if index.column() < len(self.columns)-1 or not self.isEditable(index.row()):
@@ -84,11 +85,9 @@ class CustomTableModel(QAbstractTableModel):
     def data(self, index, role=None):
         if not index.isValid():
             return None
-        row=index.row()
-        col=index.column()
         if role in [Qt.DisplayRole,Qt.EditRole]:
             return self._table.get(index.row(),self.columns[index.column()].lower())
-        if role==Qt.BackgroundRole and  not self.isEditable(row):
+        if role==Qt.BackgroundRole and  not self.isEditable(index.row()):
             return QBrush(Qt.lightGray)
 
     def headerData(self, section, orientation, role):
@@ -101,9 +100,11 @@ class CustomTableModel(QAbstractTableModel):
         if not index.isValid():
             return False
         if role == Qt.EditRole:
-            self._table.set(index.row(),value)
-            self.dataChanged.emit(index, index)
-            return True
+            prev=self._table.values[index.row()]
+            if self._table.set(index.row(),value):
+                self.stack.push(CellEdit(index, prev, self))
+                self.dataChanged.emit(index, index)
+                return True
         return False
 
     def getDataType(self,row):
@@ -118,3 +119,41 @@ class CustomTableModel(QAbstractTableModel):
 
     def isModified(self):
         return self._table.isEdited
+
+    def getInfo(self):
+        return self._table.info()
+
+    def findIndex(self,name):
+        return self._table.tabledef.findIndex(name)
+
+    def copyText(self):
+        return self._table.copyText()
+
+    def getCurrentFilename(self):
+        return self._table.currentfilename
+
+    def getItem(self,index_or_name):
+        if type(index_or_name)==type(str()):
+            index_or_name=self.findIndex(index_or_name)
+        return self._table.tabledef.items[index_or_name]
+
+    def encode(self,filename,offset,numbytes):
+        is_new_tabledef=self._table.encode(filename,offset,numbytes)
+        self._table.isEdited = False
+        return is_new_tabledef
+
+class CellEdit(QUndoCommand):
+    def __init__(self, index, prev, model, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.index = index
+        self.value = model._table.values[index.row()]
+        self.prev = prev
+        self.model = model
+
+    def undo(self):
+        self.model._table.values[self.index.row()] = self.prev
+        self.model.dataChanged.emit(self.index,self.index,[Qt.DisplayRole])
+
+    def redo(self):
+        self.model._table.values[self.index.row()] = self.value
+        self.model.dataChanged.emit(self.index,self.index,[Qt.DisplayRole])
