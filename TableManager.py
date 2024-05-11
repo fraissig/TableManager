@@ -1,6 +1,6 @@
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QColor,QKeySequence
+from PyQt5.QtGui import QKeySequence
 from PyQt5.Qt import QApplication
 from functools import partial
 

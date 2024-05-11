@@ -2,7 +2,6 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QValidator,QBrush
 
-
 class CustomIntValidator(QValidator):
     def __init__(self,mini,maxi):
         super(CustomIntValidator,self).__init__()

@@ -10,9 +10,9 @@ The structure of the cFE table is as follows:
   - including 40 bytes for Table Name
 - custom SW component data
 
-The JSON file defining each table includes Primary Header, Secondary Header and custom SW data
+The JSON file defining each table includes Primary Header, Secondary Header and custom SW data.
 
-## Menus
+## TableManager Menus
 ### *File Menu*
 
 **> New TBL File** 

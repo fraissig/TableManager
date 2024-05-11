@@ -1,7 +1,6 @@
 import struct
 import json
 import re
-import bisect
 
 # corresponds to CFE file primary header and to TBL secondary header
 HEADER_ENCODING="8I32s3I40s"

@@ -79,6 +79,7 @@ class TableObject(object):
 
 
     def encode(self,filename,offset=0,nbytes=None,bigendian=True):
+        # encode data according table definition and save in filename
         self.setCurrentTime()
         if offset==0 and nbytes==None:
             buffer = self.tabledef.encode(self.values, bigendian)
@@ -103,12 +104,15 @@ class TableObject(object):
             raise ValueError("Error during encoding {0}".format(os.path.basename(filename)))
 
     def decodeTableName(self ,filename,bigendian=True):
+        # decode TableName from filename in the Secondary Header
         with open(filename,'rb') as fd:
             buffer=fd.read()
         self.currentfilename=filename
         return self.tabledef.decodeTableName(buffer,bigendian)
 
     def decode(self ,filename,bigendian=True):
+        # decode entire table from filename based on offset/Numbytes
+        # and the related Table Definition
         with open(filename,'rb') as fd:
             buffer=fd.read()
         self.currentfilename=filename
