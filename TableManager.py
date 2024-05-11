@@ -14,6 +14,7 @@ from TableViewer import *
 CONFIG_FILENAME="TableManager.ini"
 README_FILENAME="README.md"
 LOGGING_FILENAME="TableManager.log"
+VERSION="1.1"
 
 logging.basicConfig(filename=LOGGING_FILENAME,
                     format='%(asctime)s - %(message)s',
@@ -104,7 +105,6 @@ class TableManagerMain(QMainWindow):
         self.info.setFixedHeight(120)
         self.info.setReadOnly(True)
         self.info.setPlainText("No Table Selected")
-        self.info.setTextBackgroundColor(QColor(145,145,1))
 
         # Tabs view
         self.tabs=QTabWidget(self)
@@ -231,7 +231,7 @@ class TableManagerMain(QMainWindow):
         if idx!=-1:
             dlg = QMessageBox(self)
             dlg.setWindowTitle("Change Table Definition")
-            dlg.setText("All the tables already open will be closed without saving. Do you want to continue ?")
+            dlg.setText("All the opened tables will be closed without saving. Do you want to continue ?")
             dlg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
             if dlg.exec() == QMessageBox.Ok:
                 while idx!=-1:
@@ -255,7 +255,21 @@ class TableManagerMain(QMainWindow):
         tableview.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
         tableview.resizeColumnToContents(0)
         tableview.resizeColumnToContents(3)
+        tableview.setSelectionBehavior(QAbstractItemView.SelectRows)
+        selectionmodel=tableview.selectionModel()
+        selectionmodel.selectionChanged.connect(self.ChangeSelection)
         self.tabs.setCurrentIndex(self.tabs.addTab(tableview,name))
+
+    def ChangeSelection(self,event=None):
+        idx=self.tabs.currentIndex()
+        tableview=self.tabs.widget(idx)
+        selectedrows = [tableview.model().getItem(index.row()).offset for index in tableview.selectionModel().selectedRows()]
+        n=len(selectedrows)
+        if n>0:
+            msg="{0} items selected - press CTRL+click to deselect".format(n)
+            self.statusbar.showMessage(msg)
+        else:
+            self.statusbar.showMessage("")
 
     def UpdateInfo(self,idx=None):
         if not idx:
@@ -263,6 +277,7 @@ class TableManagerMain(QMainWindow):
         tableview = self.tabs.widget(idx)
         if tableview:
             self.info.setPlainText(tableview.model().getInfo())
+            self.ChangeSelection(None)
         else:
             self.info.setPlainText("No Table Selected")
 
@@ -287,10 +302,27 @@ class TableManagerMain(QMainWindow):
                 self.tabs.removeTab(idx)
 
     def CopyToClipboard(self):
-        tableview=self.tabs.widget(self.tabs.currentIndex())
+        idx=self.tabs.currentIndex()
+        tableview=self.tabs.widget(idx)
+        selectedrows=[index.row() for index in tableview.selectionModel().selectedRows()]
         clipboard=QApplication.clipboard()
-        clipboard.setText(tableview.model().copyText())
-        msg="Table {0} copied to clipboard".format(self.tabs.tabText(self.tabs.currentIndex()))
+        all=True
+        if len(selectedrows) > 0:
+            dlg=QMessageBox()
+            dlg.setWindowTitle("Partial selection detected")
+            dlg.setText("What do you want to copy ?")
+            dlg.setIcon(QMessageBox.Warning)
+            dlg.addButton("Selected rows only",QMessageBox.NoRole)
+            dlg.addButton("Complete table",QMessageBox.YesRole)
+            all=dlg.exec()
+            if not all:
+                s="\n".join(["{0}\t{1}".format(tableview.model().getItem(row).name,
+                             tableview.model().getValue(row))for row in selectedrows])
+                msg="{0} items of table {1} copied to clipboard".format(len(selectedrows),self.tabs.tabText(idx))
+        if all or len(selectedrows)==0:
+            s=tableview.model().copyText()
+            msg="All items of table {0} copied to clipboard".format(self.tabs.tabText(idx))
+        clipboard.setText(s)
         self.logger.info(msg)
         self.statusbar.showMessage(msg)
 
@@ -372,15 +404,23 @@ class TableManagerMain(QMainWindow):
     def Save(self,filename=None):
         idx=self.tabs.currentIndex()
         tableview=self.tabs.widget(idx)
-        selectedrows=tableview.selectionModel().selectedRows()
+        selectedrows = [index.row() for index in tableview.selectionModel().selectedRows() if
+                   tableview.model().getItem(index.row()).offset >= 0]
         # default values
         offset = 0; numbytes = None
         # check if selected rows outside table headers and set offset & numbytes accordingly
         if len(selectedrows)>0:
-            indexes=[index.row() for index in selectedrows if tableview.model().getItem(index.row()).offset>=0]
-            if len(indexes)>0:
-                offset=min([tableview.model().getItem(idx).offset for idx in indexes])
-                numbytes=sum([tableview.model().getItem(idx).bytesSize() for idx in range(min(indexes),max(indexes)+1)])
+            dlg=QMessageBox()
+            dlg.setWindowTitle("Partial selection detected")
+            dlg.setText("What do you want to save ?")
+            dlg.setIcon(QMessageBox.Warning)
+            dlg.addButton("Selected rows only",QMessageBox.NoRole)
+            dlg.addButton("Complete table",QMessageBox.YesRole)
+            all=dlg.exec()
+            if not all:
+                offset=min([tableview.model().getItem(row).offset for row in selectedrows])
+                numbytes=sum([tableview.model().getItem(row).bytesSize() for row in range(min(selectedrows),max(selectedrows)+1)])
+
         if not filename:
             filename=tableview.model().getCurrentFilename()
             if not filename:
@@ -390,15 +430,16 @@ class TableManagerMain(QMainWindow):
             if not filename.endswith('.tbl'):
                 filename+='.tbl'
             try:
-                is_new_tabledef=tableview.model().encode(filename,offset,numbytes)
-                self.UpdateInfo(idx)
-                msg="file {0} saved".format(filename)
+                tableview.model().encode(filename,offset,numbytes)
+                if numbytes:
+                    self.Open_file(filename)
+                    msg="table {0} partially saved in file {1}".format(self.tabs.tabText(idx),filename)
+                else:
+                    self.tabs.setTabText(idx,os.path.basename(filename))
+                    self.UpdateInfo(idx)
+                    msg="file {0} saved".format(filename)
                 self.statusbar.showMessage(msg)
                 self.logger.info(msg)
-                if is_new_tabledef:
-                    self.Open_file(filename)
-                else:
-                    self.tabs.setTabText(self.tabs.currentIndex(),os.path.basename(filename))
             except ValueError as err:
                 self.statusbar.showMessage(str(err))
                 self.logger.error(str(err))
@@ -416,7 +457,7 @@ class TableManagerMain(QMainWindow):
         dlg = QMessageBox(self)
         dlg.setWindowTitle("About TableManager")
         dlg.setTextFormat(Qt.RichText)
-        dlg.setText("<h1>TableManager</h1><br>Version 1.0<br>May 2024<br><br><a href='https://github.com/FRAISSIG/TableManager'>source code on Github</a>")
+        dlg.setText("<h1>TableManager</h1><br>Version {0}<br><br><a href='https://github.com/FRAISSIG/TableManager'>source code on Github</a>".format(VERSION))
         dlg.setStandardButtons(QMessageBox.Ok)
         dlg.setIcon(QMessageBox.Information)
         button = dlg.exec()

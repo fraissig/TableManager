@@ -136,15 +136,17 @@ class CustomTableModel(QAbstractTableModel):
     def getCurrentFilename(self):
         return self._table.currentfilename
 
+    def getValue(self,idx):
+        return self._table.values[idx]
+
     def getItem(self,index_or_name):
         if type(index_or_name)==type(str()):
             index_or_name=self.findIndex(index_or_name)
         return self._table.tabledef.items[index_or_name]
 
     def encode(self,filename,offset,numbytes):
-        is_new_tabledef=self._table.encode(filename,offset,numbytes)
+        self._table.encode(filename,offset,numbytes)
         self._table.isEdited = False
-        return is_new_tabledef
 
 class CellEdit(QUndoCommand):
     def __init__(self, index, prev, model, *args, **kwargs):

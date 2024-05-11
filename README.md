@@ -1,19 +1,34 @@
 # TableManager
 This python tool allows to manage cFE Table binary file .tbl as defined in cFS Framework https://github.com/nasa/cfs .
-The TableManager tool is based on Table Definition JSON file, to decode and to encode cFE Table as a binary file.
+The TableManager tool is based on Table Definition JSON files, to decode and to encode cFE Table as a binary file.
 The tool is coded in Python (>=3.9) and requires PyQt5 for the Graphical User Interface.
+
+The structure of the cFE table is as follows:
+- cFE File Primary Header (64 bytes)
+  - including 32 bytes for File description
+- cFE Table Secondary Header (52 bytes)
+  - including 40 bytes for Table Name
+- custom SW component data
+
+The JSON file defining each table includes Primary Header, Secondary Header and custom SW data
 
 ## Menus
 ### *File Menu*
 
 **> New TBL File** 
-: create a new table based on table definition selected in the submenu
+: create a new table based on table definition selected in the submenu.
+This menu is empty if no directory is selected in the configuration file
+TableManager.ini.
+In this case, select 'Changes Tables Definition directory' menu to initialize.
 
 **> Open TBL File** 
 : open an existing .tbl file and display it in a new tab
 
 **> Save TBL File** 
-: save the current table in a .tbl file
+: save the current table in a .tbl file.
+If some rows are selected, a dialog box will ask to confirm
+if only the selected rows have to be saved or if it is the whole table.
+Note that headers rows are always saved.
 
 **> Save TBL File as...*** 
 : same than save but allow to define a new name
@@ -33,10 +48,13 @@ The tool is coded in Python (>=3.9) and requires PyQt5 for the Graphical User In
 : redo the previous modification in the selected table
 
 **> Copy to clipboard** 
-: copy the current table content (names,values) in the clipboard
+: copy the current table content (names,values) in the clipboard. 
+If some rows are selected, a dialog box will ask to confirm 
+if only selected rows have to be copied or the whole table
 
 **> Paste from clipboard**
-: paste table with columns (names,values) in the current table from the clipboard
+: paste columns (names,values) in the current table from the clipboard.
+if the names are not found in the current table, the values will not be pasted
 
 ### *Help Menu*
 
@@ -50,7 +68,7 @@ The tool is coded in Python (>=3.9) and requires PyQt5 for the Graphical User In
 : display the application logging file
 
 ## Table Definition (.json file)
-TableManager requires the tables' definition (one json file per table).
+TableManager requires the tables' definition (one json file per table, all located in the same directory).
 The following dictionary fields are expected, for each item of the table:
 ```
 {
@@ -66,8 +84,8 @@ The following dictionary fields are expected, for each item of the table:
 ```
 The table definition JSON file shall include CFE File Primary Header and TBL Secondary Header.
 
-Available datatype
-------------------
+Available datatypes
+-------------------
 * "uint8" : unsigned integer 8 bits
 * "uint16": unsigned integer 16 bits
 * "uint24": unsigned interger 24 bits (for padding) 
