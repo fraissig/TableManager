@@ -332,6 +332,7 @@ class TableDefinition(object):
                 partial.items.append(item)
                 indexes.append(idx)
                 totalbytes += item.bytesSize()
+        partial.filename=self.filename
         idx = partial.findIndex("NumBytes")
         partial.items[idx].defaultvalue = partial.bytesSize() - struct.calcsize(HEADER_ENCODING)
         idx = partial.findIndex("Offset")
