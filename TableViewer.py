@@ -1,6 +1,6 @@
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QValidator,QIntValidator,QBrush
+from PyQt5.QtGui import QValidator,QBrush
 
 
 class CustomIntValidator(QValidator):
@@ -53,6 +53,10 @@ class CustomDelegate(QStyledItemDelegate):
             current_index = editor.findText(model_value)
             if current_index > 0:
                 editor.setCurrentIndex(current_index)
+        elif isinstance(editor,QLineEdit):
+            model_value = index.model().data(index, Qt.EditRole)
+            editor.setText(str(model_value))
+            editor.setClearButtonEnabled(True)
 
     def setModelData(self, editor, model, index):
         if isinstance(editor,QLineEdit):
