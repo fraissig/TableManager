@@ -30,7 +30,7 @@ If some rows are selected, a dialog box will ask to confirm
 if only the selected rows have to be saved or if it is the whole table.
 Note that headers rows are always saved.
 
-**> Save TBL File as...*** 
+**> Save TBL File as...** 
 : same than save but allow to define a new name
 
 **> Change Tables Definition directory** 
