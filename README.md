@@ -98,4 +98,4 @@ Available datatypes
 * "float16": floating value (16 bits)
 * "float" : floating value (32 bits)
 * "double","double64": floating value (64 bits)
-* "string": String with "length" to be defined
+* "string": String requiring "length" to be defined
