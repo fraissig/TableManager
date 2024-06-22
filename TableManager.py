@@ -263,8 +263,11 @@ class TableManagerMain(QMainWindow):
     def ChangeSelection(self,event=None):
         idx=self.tabs.currentIndex()
         tableview=self.tabs.widget(idx)
-        selectedrows = [tableview.model().getItem(index.row()).offset for index in tableview.selectionModel().selectedRows()]
-        n=len(selectedrows)
+        if tableview:
+            selectedrows = [tableview.model().getItem(index.row()).offset for index in tableview.selectionModel().selectedRows()]
+            n=len(selectedrows)
+        else:
+            n=0
         if n>0:
             msg="{0} items selected - press CTRL+click to deselect".format(n)
             self.statusbar.showMessage(msg)
@@ -308,23 +311,14 @@ class TableManagerMain(QMainWindow):
         clipboard=QApplication.clipboard()
         all=True
         if len(selectedrows) > 0:
-            dlg=QMessageBox()
-            dlg.setWindowTitle("Partial selection detected")
-            dlg.setText("What do you want to copy ?")
-            dlg.setIcon(QMessageBox.Warning)
-            dlg.addButton("Selected rows only",QMessageBox.NoRole)
-            dlg.addButton("Complete table",QMessageBox.YesRole)
-            all=dlg.exec()
-            if not all:
-                s="\n".join(["{0}\t{1}".format(tableview.model().getItem(row).name,
+            s="\n".join(["{0}\t{1}".format(tableview.model().getItem(row).name,
                              tableview.model().getValue(row))for row in selectedrows])
-                msg="{0} items of table {1} copied to clipboard".format(len(selectedrows),self.tabs.tabText(idx))
-        if all or len(selectedrows)==0:
-            s=tableview.model().copyText()
-            msg="All items of table {0} copied to clipboard".format(self.tabs.tabText(idx))
-        clipboard.setText(s)
-        self.logger.info(msg)
-        self.statusbar.showMessage(msg)
+            msg="{0} items of table {1} copied to clipboard".format(len(selectedrows),self.tabs.tabText(idx))
+            clipboard.setText(s)
+            self.logger.info(msg)
+            self.statusbar.showMessage(msg)
+        else:
+            self.statusbar.showMessage("nothing selected for copy")
 
     def PasteFromClipboard(self):
         itab=self.tabs.currentIndex()
@@ -339,7 +333,7 @@ class TableManagerMain(QMainWindow):
                     name,valuestr=line.split()
                     idx=model.findIndex(name)
                     if idx:
-                        logging.info("{0} found".format(name),valuestr)
+                        logging.info("{0} found, value={1}".format(name,valuestr))
                         if model.setData(model.index(idx,0),valuestr,Qt.EditRole):
                             cnt+=1
                         else:
