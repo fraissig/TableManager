@@ -125,6 +125,6 @@ class TableObject(object):
         return str(self)
 
     def __repr__(self):
-        return "\n".join(["{0}\t{1}".format(item.name,item.display(v)) for item,v in zip(self.tabledef.items,self.values)])
+        return "\n".join(["{0}\t{1}".format(item.name,v) for item,v in zip(self.tabledef.items,self.values)])
 
 
